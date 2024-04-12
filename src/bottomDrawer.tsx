@@ -14,6 +14,7 @@ import {
   Pressable,
   Easing,
   Keyboard,
+  Platform,
 } from 'react-native';
 import {styles} from './styles';
 import {
@@ -82,7 +83,7 @@ const BottomDrawer: ForwardRefRenderFunction<
     lastPosition.current = _val;
     setModalVisible(true);
     Animated.timing(animatedHeight, {
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS === 'ios',
       toValue: screenHeight - _val,
       easing: Easing.out(Easing.back(1)),
       duration: openDuration,
@@ -99,7 +100,7 @@ const BottomDrawer: ForwardRefRenderFunction<
 
   const handleClose = () => {
     Animated.timing(animatedHeight, {
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS === 'ios',
       toValue: screenHeight,
       easing: Easing.in(Easing.ease),
       duration: closeDuration,
@@ -118,7 +119,7 @@ const BottomDrawer: ForwardRefRenderFunction<
       lastPosition.current = snapPoints[index];
       currentIndex.current = index;
       Animated.spring(animatedHeight, {
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS === 'ios',
         toValue: screenHeight - snapPoints[index],
       }).start();
     }
@@ -138,7 +139,7 @@ const BottomDrawer: ForwardRefRenderFunction<
       lastPosition.current = position;
     }
     Animated.spring(animatedHeight, {
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS === 'ios',
       toValue: screenHeight - position,
     }).start();
   };
@@ -190,7 +191,7 @@ const BottomDrawer: ForwardRefRenderFunction<
         }
         Animated.spring(animatedHeight, {
           toValue: screenHeight - lastPosition.current,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS === 'ios',
         }).start();
       },
     }),
